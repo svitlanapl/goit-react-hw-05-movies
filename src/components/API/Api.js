@@ -8,7 +8,7 @@ export const getMovies = async () => {
   try {
     const response = await axios.get(`/trending/movie/day?api_key=${KEY}`);
     if (response.data.results === 0) {
-      throw Error('There is no any match on your request!');
+      throw Error('please, reload page!');
     }
     // console.log(response.data.results);
     return response.data.results;

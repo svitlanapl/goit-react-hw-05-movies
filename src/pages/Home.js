@@ -5,15 +5,14 @@ import { getMovies } from '../components/API/Api';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
-  // const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchMovies() {
       try {
         const movies = await getMovies();
         setMovies(movies);
-      } catch {
-        // setError('Please, reload the page');
+      } catch (error) {
+        console.log(error.message);
       }
     }
     fetchMovies();
