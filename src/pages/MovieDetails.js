@@ -1,14 +1,12 @@
 import { useParams } from 'react-router-dom';
 const MovieDetails = () => {
   const { movieid } = useParams();
-  const movieDetails = getMovieById(movieid);
+  // const movieDetails = getMovieById(movieid);
   return (
     <main>
       <img src={movieid.poster_path} alt="" />
       <div>
-        <h2>
-           {movieid.title}
-        </h2>
+        <h2>{movieid.title}</h2>
         <p>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus
           sunt excepturi nesciunt iusto dignissimos assumenda ab quae cupiditate
