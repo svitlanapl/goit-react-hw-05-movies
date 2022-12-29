@@ -1,6 +1,12 @@
 import { PropTypes } from 'prop-types';
 
-import { Form, Wrapper, Input, Button } from '../SearchBox/SearchBox.styled';
+import {
+  Form,
+  Wrapper,
+  Input,
+  Button,
+  Label,
+} from '../SearchBox/SearchBox.styled';
 
 import { useState } from 'react';
 
@@ -21,6 +27,9 @@ export const SearchBox = ({ onChange }) => {
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>
+        <Button type="submit">
+          <Label>Search</Label>
+        </Button>
         <Input
           type="text"
           name="searchQuery"
@@ -30,7 +39,6 @@ export const SearchBox = ({ onChange }) => {
           autoFocus
           onChange={handleInput}
         />
-        <Button type="submit"></Button>
       </Form>
     </Wrapper>
   );

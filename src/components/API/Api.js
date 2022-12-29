@@ -51,7 +51,7 @@ export const getCast = async movieId => {
     const response = await axios.get(
       `/movie/${movieId}/credits?api_key=${KEY}&language=en-US`
     );
-    if (!response.data.results.length) {
+    if (!response.data.cast.length) {
       throw Error('No casts found!');
     }
     // console.log(response.data.cast);

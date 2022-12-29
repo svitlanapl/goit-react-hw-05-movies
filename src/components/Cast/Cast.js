@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import posterDefault from 'img/posterMovie.png';
 import { getCast } from '../API/Api';
+import { ItemCast, Image, ParagraphCast } from './Cast.styled';
 
 const Cast = () => {
   const fotoUrl = 'https://image.tmdb.org/t/p/w300';
@@ -32,17 +33,17 @@ const Cast = () => {
   return (
     <ul>
       {movieCast.map(cast => (
-        <li key={cast.id}>
-          <img
+        <ItemCast key={cast.id}>
+          <Image
             src={
               cast.profile_path ? fotoUrl + cast.profile_path : posterDefault
             }
             alt={cast.name}
-            width={100}
+            width={150}
           />
-          <p>{cast.name}</p>
-          <p>Character: {cast.character} </p>
-        </li>
+          <ParagraphCast>{cast.name}</ParagraphCast>
+          <ParagraphCast>Character: {cast.character} </ParagraphCast>
+        </ItemCast>
       ))}
     </ul>
   );

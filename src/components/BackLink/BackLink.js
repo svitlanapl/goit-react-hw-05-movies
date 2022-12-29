@@ -11,6 +11,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   font-weight: 500;
   text-transform: uppercase;
+  margin-left: 100px;
 
   :hover {
     color: orangered;
@@ -20,10 +21,8 @@ const StyledLink = styled(Link)`
 export const BackLink = ({ to, children }) => {
   return (
     <StyledLink to={to}>
-      <button>
-        <HiArrowLeft size="24" />
-        {children}
-      </button>
+      <HiArrowLeft size="24" />
+      {children}
     </StyledLink>
   );
 };

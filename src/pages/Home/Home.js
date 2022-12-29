@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { MovieList } from '../components/MovieList/MovieList';
-import { getMovies } from '../components/API/Api';
+import { MovieList } from '../../components/MovieList/MovieList';
+import { getMovies } from '../../components/API/Api';
+import { Title } from './Home.styled';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -21,7 +22,7 @@ const Home = () => {
 
   return (
     <main>
-      <h1>Trending today</h1>
+      <Title>Trending today</Title>
       <MovieList movies={movies} />
     </main>
   );

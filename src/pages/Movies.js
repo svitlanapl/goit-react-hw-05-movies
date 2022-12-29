@@ -14,6 +14,7 @@ const Movies = () => {
   const searchQuery = searchParams.get('query') ?? '';
 
   useEffect(() => {
+    setMovies([]);
     if (!searchQuery) {
       return;
     }
