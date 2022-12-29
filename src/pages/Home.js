@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { MovieList } from '../components/MovieList/MovieList';
 import { getMovies } from '../components/API/Api';
@@ -12,7 +13,7 @@ const Home = () => {
         const movies = await getMovies();
         setMovies(movies);
       } catch (error) {
-        console.log(error.message);
+        toast(error.message);
       }
     }
     fetchMovies();
