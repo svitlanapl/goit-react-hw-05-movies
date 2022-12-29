@@ -15,15 +15,10 @@ export const getMovies = async () => {
   } catch (error) {
     console.log(error.config);
     if (error.response) {
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-      throw Error('There is no server response. Try later again!');
+      throw Error('Ooops. Something went wrong... Try  again!');
     } else if (error.request) {
-      console.log(error.request);
-      throw Error('There is no server request. Try later again!');
+      throw Error('Ooops. Something went wrong... Try  again!');
     } else {
-      console.log('Error', error.message);
       throw error;
     }
   }
@@ -35,23 +30,17 @@ export const getMovieById = async movieId => {
       `/movie/${movieId}?api_key=${KEY}&language=en-US`
     );
     if (response.data.length === 0) {
-      throw Error('There is no any match on your request!');
+      throw Error('No movies found!');
     }
     // console.log(response.data);
 
     return response.data;
   } catch (error) {
-    console.log(error.config);
     if (error.response) {
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-      throw Error('There is no server response. Try later again!');
+      throw Error('Ooops. Something went wrong... Try  again!');
     } else if (error.request) {
-      console.log(error.request);
-      throw Error('There is no server request. Try later again!');
+      throw Error('Ooops. Something went wrong... Try  again!');
     } else {
-      console.log('Error', error.message);
       throw error;
     }
   }
@@ -62,24 +51,18 @@ export const getCast = async movieId => {
     const response = await axios.get(
       `/movie/${movieId}/credits?api_key=${KEY}&language=en-US`
     );
-    if (response.data.results.length === 0) {
-      throw Error('There is no any match on your request!');
+    if (!response.data.results.length) {
+      throw Error('No casts found!');
     }
     // console.log(response.data.cast);
 
     return response.data.cast;
   } catch (error) {
-    console.log(error.config);
     if (error.response) {
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-      throw Error('There is no server response. Try later again!');
+      throw Error('Ooops. Something went wrong... Try  again!');
     } else if (error.request) {
-      console.log(error.request);
-      throw Error('There is no server request. Try later again!');
+      throw Error('Ooops. Something went wrong... Try  again!');
     } else {
-      console.log('Error', error.message);
       throw error;
     }
   }
@@ -90,24 +73,18 @@ export const getReviews = async movieId => {
     const response = await axios.get(
       `/movie/${movieId}/reviews?api_key=${KEY}&language=en-US`
     );
-    if (response.data.results.length === 0) {
-      throw Error('There is no any match on your request!');
+    if (!response.data.results.length) {
+      throw Error('No reviews found!');
     }
     // console.log(response.data.results);
 
     return response.data.results;
   } catch (error) {
-    console.log(error.config);
     if (error.response) {
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-      throw Error('There is no server response. Try later again!');
+      throw Error('Ooops. Something went wrong... Try  again!');
     } else if (error.request) {
-      console.log(error.request);
-      throw Error('There is no server request. Try later again!');
+      throw Error('Ooops. Something went wrong... Try  again!');
     } else {
-      console.log('Error', error.message);
       throw error;
     }
   }
@@ -119,15 +96,15 @@ export const searchMovies = async searchQuery => {
       `/search/movie?api_key=${KEY}&query=${searchQuery}&language=en-US&page=1&include_adult=false`
     );
     if (!response.data.results.length) {
-      throw Error('There is no any match on your request!');
+      throw Error('No movies found!!');
     }
 
     return response.data.results;
   } catch (error) {
     if (error.response) {
-      throw Error('There is no server response. Try later again!');
+      throw Error('Ooops. Something went wrong... Try  again!');
     } else if (error.request) {
-      throw Error('There is no server request. Try later again!');
+      throw Error('Ooops. Something went wrong... Try  again!');
     } else {
       throw error;
     }
