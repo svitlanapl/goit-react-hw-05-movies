@@ -2,12 +2,13 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import posterDefault from 'img/posterMovie.png';
-import { getCast } from '../API/Api';
-import { ItemCast, Image, ParagraphCast } from './Cast.styled';
+import { getMovieCredits } from 'servises/movieApi';
+import defaultPoster from 'image/poster.png';
+
+import { CastList, CastItem, CastImage, CastText } from './Cast.styled';
 
 const Cast = () => {
-  const fotoUrl = 'https://image.tmdb.org/t/p/w300';
+  const BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
   const { movieId } = useParams();
   const [movieCast, setMovieCast] = useState([]);
@@ -15,7 +16,7 @@ const Cast = () => {
   useEffect(() => {
     async function fetchMovieCast() {
       try {
-        const movieCast = await getCast(movieId);
+        const movieCast = await getMovieCredits(movieId);
 
         setMovieCast(movieCast);
       } catch (error) {
@@ -31,22 +32,22 @@ const Cast = () => {
   }
 
   return (
-    <ul>
+    <CastList>
       {movieCast.map(cast => (
-        <ItemCast key={cast.id}>
-          <Image
+        <CastItem key={cast.id}>
+          <CastImage
             src={
-              cast.profile_path ? fotoUrl + cast.profile_path : posterDefault
+              cast.profile_path ? BASE_URL + cast.profile_path : defaultPoster
             }
             alt={cast.name}
-            width={150}
           />
-          <ParagraphCast>{cast.name}</ParagraphCast>
-          <ParagraphCast>Character: {cast.character} </ParagraphCast>
-        </ItemCast>
+          <CastText>{cast.name}</CastText>
+          <CastText>Character: {cast.character} </CastText>
+        </CastItem>
       ))}
-    </ul>
+    </CastList>
   );
 };
 
 export default Cast;
+

@@ -1,24 +1,24 @@
 import { PropTypes } from 'prop-types';
+import { useState, useEffect } from 'react';
 
-import {
-  Form,
-  Wrapper,
-  Input,
-  Button,
-  Label,
-} from '../SearchBox/SearchBox.styled';
+import {  Wrapper,  Form, Input, Button, Icon} from '../SearchBox/SearchBox.styled';
 
-import { useState } from 'react';
 
-export const SearchBox = ({ onChange }) => {
+export const SearchBox = ({ query='', onChange }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleInput = e => {
-    setSearchQuery(e.target.value);
+  useEffect(() => {
+    if (query) {
+      setSearchQuery(query)
+    }
+  }, [query]);
+
+  const handleChange = event => {
+    setSearchQuery(event.target.value);
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = event => {
+    event.preventDefault();
 
     onChange(searchQuery);
     setSearchQuery('');
@@ -27,9 +27,6 @@ export const SearchBox = ({ onChange }) => {
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>
-        <Button type="submit">
-          <Label>Search</Label>
-        </Button>
         <Input
           type="text"
           name="searchQuery"
@@ -37,8 +34,11 @@ export const SearchBox = ({ onChange }) => {
           placeholder="Search movies"
           autoComplete="off"
           autoFocus
-          onChange={handleInput}
+          onChange={handleChange}
         />
+        <Button type="submit">
+          <Icon />
+        </Button>
       </Form>
     </Wrapper>
   );
@@ -48,23 +48,3 @@ SearchBox.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-// export const SearchBox = ({ onSubmit }) => {
-//   return (
-//     <Wrapper>
-//       <Form onSubmit={onSubmit}>
-//         <Input
-//           type="text"
-//           name="query"
-//           placeholder="Search movies"
-//           autoComplete="off"
-//           autoFocus
-//         />
-//         <Button type="submit"></Button>
-//       </Form>
-//     </Wrapper>
-//   );
-// };
-
-// SearchBox.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };

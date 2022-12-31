@@ -7,4 +7,8 @@ export const List = styled.ul`
 
 export const Item = styled.li`
   padding-bottom: 10px;
+   :hover {
+    color: teal;
+    font-weight: bold;
+  }
 `;

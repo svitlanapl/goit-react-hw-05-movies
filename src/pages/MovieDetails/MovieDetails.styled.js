@@ -5,12 +5,18 @@ export const Wrapper = styled.div`
   gap: 40px;
   padding-left: 100px;
 `;
-export const TitleMovie = styled.h2`
+
+export const Image = styled.img`
+  width: 700px;
+  border-radius: 5px;
+`;
+
+export const Title = styled.h2`
   font-size: 24px;
   margin-bottom: 20px;
 `;
 
-export const Paragraph = styled.p`
+export const Text = styled.p`
   font-size: 18px;
   margin-bottom: 20px;
 `;
@@ -19,21 +25,18 @@ export const TitleOverview = styled.h3`
   margin-bottom: 20px;
 `;
 
-export const WrapperInform = styled.div`
+export const Inform = styled.div`
   padding: 40px 0 40px 100px;
-  border-bottom: solid #e6b0aa;
+  border-bottom: solid teal;
 `;
 
-export const ItemInform = styled.li`
+export const Item = styled.li`
   padding-bottom: 10px;
   font-size: 20px;
 
   :hover {
     text-decoration: underline;
-    color: #e6b0aa;
+    color: teal;
+    font-weight: bold;
   }
 `;
-// export const ListInform = styled.ul`
-//   padding-bottom: 10px;
-//   border-bottom: solid;
-// `;

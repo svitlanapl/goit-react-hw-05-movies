@@ -1,25 +1,18 @@
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
-import { BackLink } from '../../components/BackLink/BackLink';
+import { GoBack } from 'components/GoBack/GoBack';
 import { useState, useEffect, Suspense } from 'react';
 import { toast } from 'react-toastify';
 
-import { getMovieById } from '../../components/API/Api';
-import posterDefault from '../../img/posterMovie.png';
+import { getMovieDetails } from 'servises/movieApi';
+import defaultPoster from 'image/poster.png';
 import { Loader } from 'components/Loader/Loader';
-import {
-  ItemInform,
-  Paragraph,
-  TitleMovie,
-  TitleOverview,
-  Wrapper,
-  WrapperInform,
-} from './MovieDetails.styled';
+import {  Wrapper, Image, Title, Text, TitleOverview, Inform,  Item} from './MovieDetails.styled';
 
 const MovieDetails = () => {
-  const fotoUrl = 'https://image.tmdb.org/t/p/w300';
+  const BASE_URL = 'https://image.tmdb.org/t/p/w300';
 
   const location = useLocation();
-  const backLink = location.state?.from ?? '/';
+  const goBack = location.state?.from ?? '/';
 
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState([]);
@@ -27,7 +20,7 @@ const MovieDetails = () => {
   useEffect(() => {
     async function fetchMovieDetails() {
       try {
-        const movieDetails = await getMovieById(movieId);
+        const movieDetails = await getMovieDetails(movieId);
 
         setMovieDetails(movieDetails);
       } catch (error) {
@@ -40,56 +33,54 @@ const MovieDetails = () => {
 
   return (
     <main>
-      <BackLink to={backLink}>Go back</BackLink>
+      <GoBack to={goBack}>Go back</GoBack>
       <Wrapper>
         <div>
-          <img
+          <Image
             src={
               movieDetails.poster_path
-                ? fotoUrl + movieDetails.poster_path
-                : posterDefault
+                ? BASE_URL + movieDetails.poster_path
+                : defaultPoster
             }
-            width={300}
             alt={movieDetails.title}
           />
         </div>
-
         <div>
-          <TitleMovie>
+          <Title>
             {movieDetails.title} (
             {movieDetails.release_date
               ? movieDetails.release_date.slice(0, 4)
               : ' No year'}
             )
-          </TitleMovie>
-          <Paragraph>
+          </Title>
+          <Text>
             User Score:{' '}
             {movieDetails.vote_average
               ? Math.floor(movieDetails.vote_average * 10).toFixed(0)
               : ''}
             %
-          </Paragraph>
+          </Text>
           <TitleOverview> Overview</TitleOverview>
-          <Paragraph>{movieDetails.overview}</Paragraph>
+          <Text>{movieDetails.overview}</Text>
           <TitleOverview>Genres</TitleOverview>
-          <Paragraph>
+          <Text>
             {movieDetails.genres
               ? movieDetails.genres.map(genre => genre.name).join(' ')
               : 'Genre not specified'}
-          </Paragraph>
+          </Text>
         </div>
       </Wrapper>
-      <WrapperInform>
-        <TitleMovie>Additional information</TitleMovie>
+      <Inform>
+        <Title>Additional information</Title>
         <ul>
-          <ItemInform>
+          <Item>
             <Link to="cast">Cast</Link>
-          </ItemInform>
-          <ItemInform>
+          </Item>
+          <Item>
             <Link to="reviews">Reviews</Link>
-          </ItemInform>
+          </Item>
         </ul>
-      </WrapperInform>
+      </Inform>
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>

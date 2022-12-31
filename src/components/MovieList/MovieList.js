@@ -4,6 +4,7 @@ import { Item, List } from './MovieList.styled';
 
 export const MovieList = ({ movies }) => {
   const location = useLocation();
+  
   return (
     <div>
       <List>

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import { getReviews } from '../API/Api';
+import { getMovieReviews } from 'servises/movieApi';
 import { ParagraphRev, TitleReviews } from './Reviews.styled';
 
 const Reviews = () => {
@@ -12,7 +12,7 @@ const Reviews = () => {
   useEffect(() => {
     async function fetchMovieReviews() {
       try {
-        const movieReviews = await getReviews(movieId);
+        const movieReviews = await getMovieReviews(movieId);
 
         setMovieReviews(movieReviews);
       } catch (error) {
