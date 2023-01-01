@@ -2,9 +2,9 @@ import { HiArrowLeft } from 'react-icons/hi';
 
 import { StyledLink } from './GoBack.styled'
 
-export const GoBack = ({ back, children }) => {
+export const GoBack = ({ to, children }) => {
   return (
-    <StyledLink to={back}>
+    <StyledLink to={to}>
       <HiArrowLeft size='22' />
       {children}
     </StyledLink>
