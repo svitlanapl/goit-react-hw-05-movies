@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+
 import { toast } from 'react-toastify';
 
-import { getMoviesSearch } from '../servises/movieApi';
-import { SearchBox } from 'components/SearchBox/SearchBox';
-import { MovieList } from 'components/MovieList/MovieList';
 import { Loader } from 'components/Loader/Loader';
+import { getMoviesSearch } from 'servises/movieApi';
+import { SearchBox } from 'components/SearchBox/SearchBox';
+import { MovieCard } from 'components/MovieList/MovieList';
+
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -41,7 +43,7 @@ const Movies = () => {
     <div>
       {loading && <Loader />}
       <SearchBox onChange={handleSubmit} />
-      {movies && <MovieList movies={movies} />}
+      {movies && <MovieCard movies={movies} />}
     </div>
   );
 };

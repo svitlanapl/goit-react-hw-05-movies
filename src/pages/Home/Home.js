@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getMoviesTrending } from 'servises/movieApi';
 import { toast } from 'react-toastify';
 
-import { MovieList } from '../../components/MovieList/MovieList';
+import { MovieCard } from 'components/MovieList/MovieList';
 
 import { Title } from './Home.styled';
 
@@ -24,8 +24,9 @@ const Home = () => {
   return (
     <main>
       <Title>Trending today</Title>
-      <MovieList movies={movies} />
+      <MovieCard movies={movies} />
     </main>
   );
 };
+
 export default Home;

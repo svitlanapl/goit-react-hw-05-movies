@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import { getMovieReviews } from 'servises/movieApi';
-import { ParagraphRev, TitleReviews } from './Reviews.styled';
+
+import { ReviewsTitle, ReviewsText } from './Reviews.styled';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -30,13 +31,13 @@ const Reviews = () => {
   return (
     <div>
       {movieReviews.length === 0 && (
-        <p>We don't have any reviews for this movie</p>
+        <p>Sorry, no reviews were found for this movie.</p>
       )}
       <ul>
         {movieReviews.map(review => (
           <li key={review.id}>
-            <TitleReviews>Author: {review.author}</TitleReviews>
-            <ParagraphRev> {review.content} </ParagraphRev>
+            <ReviewsTitle>Author: {review.author}</ReviewsTitle>
+            <ReviewsText> {review.content} </ReviewsText>
           </li>
         ))}
       </ul>

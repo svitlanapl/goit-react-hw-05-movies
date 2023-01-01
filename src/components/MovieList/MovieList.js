@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
-import { Item, List } from './MovieList.styled';
 
-export const MovieList = ({ movies }) => {
+import { List, Item,} from './MovieList.styled';
+
+export const MovieCard = ({ movies }) => {
   const location = useLocation();
   
   return (
-    <div>
       <List>
         {movies.map(movie => (
           <Item key={movie.id}>
@@ -16,11 +16,10 @@ export const MovieList = ({ movies }) => {
           </Item>
         ))}
       </List>
-    </div>
   );
 };
 
-MovieList.propTypes = {
+MovieCard.propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -28,3 +27,4 @@ MovieList.propTypes = {
     })
   ).isRequired,
 };
+

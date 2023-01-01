@@ -1,15 +1,16 @@
-import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { GoBack } from 'components/GoBack/GoBack';
 import { useState, useEffect, Suspense } from 'react';
 import { toast } from 'react-toastify';
+import defaultPoster from 'image/poster.png';
 
 import { getMovieDetails } from 'servises/movieApi';
-import defaultPoster from 'image/poster.png';
 import { Loader } from 'components/Loader/Loader';
+
 import {  Wrapper, Image, Title, Text, TitleOverview, Inform,  Item} from './MovieDetails.styled';
 
 const MovieDetails = () => {
-  const BASE_URL = 'https://image.tmdb.org/t/p/w300';
+  const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w400';
 
   const location = useLocation();
   const goBack = location.state?.from ?? '/';
@@ -21,7 +22,6 @@ const MovieDetails = () => {
     async function fetchMovieDetails() {
       try {
         const movieDetails = await getMovieDetails(movieId);
-
         setMovieDetails(movieDetails);
       } catch (error) {
         toast(error.message);
@@ -35,16 +35,14 @@ const MovieDetails = () => {
     <main>
       <GoBack to={goBack}>Go back</GoBack>
       <Wrapper>
-        <div>
           <Image
             src={
               movieDetails.poster_path
-                ? BASE_URL + movieDetails.poster_path
+                ? BASE_IMG_URL + movieDetails.poster_path
                 : defaultPoster
             }
-            alt={movieDetails.title}
+            alt={movieDetails.title || movieDetails.name}
           />
-        </div>
         <div>
           <Title>
             {movieDetails.title} (
@@ -66,7 +64,7 @@ const MovieDetails = () => {
           <Text>
             {movieDetails.genres
               ? movieDetails.genres.map(genre => genre.name).join(' ')
-              : 'Genre not specified'}
+              : 'Sorry genre not found.'}
           </Text>
         </div>
       </Wrapper>
@@ -87,4 +85,5 @@ const MovieDetails = () => {
     </main>
   );
 };
+
 export default MovieDetails;

@@ -14,8 +14,8 @@ import { GlobalStyle } from 'components/GlobalStyle';
 // import Reviews from 'components/Reviews';
 
 const Home = lazy(() => import('../pages/Home/Home'));
-const Movies = lazy(() => import('../pages/Movies'));
-const NotFound = lazy(() => import('../pages/NotFound'));
+const Movies = lazy(() => import('../pages/Movies/Movies'));
+const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 const MovieDetails = lazy(() => import('../pages/MovieDetails/MovieDetails'));
 const Cast = lazy(() => import('../components/Cast/Cast'));
 const Reviews = lazy(() => import('../components/Reviews/Reviews'));

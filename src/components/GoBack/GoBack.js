@@ -5,7 +5,7 @@ import { StyledLink } from './GoBack.styled'
 export const GoBack = ({ back, children }) => {
   return (
     <StyledLink to={back}>
-      <HiArrowLeft size='24' />
+      <HiArrowLeft size='22' />
       {children}
     </StyledLink>
   );
