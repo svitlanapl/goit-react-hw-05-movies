@@ -8,7 +8,6 @@ export const CastList = styled.ul`
   grid-gap: 20px;
 `;
 
-
 export const CastItem = styled.li`
   padding-top: 30px;
   padding-left: 80px;

@@ -3,7 +3,6 @@ import 'modern-normalize';
 
 export const GlobalStyle = createGlobalStyle`
 
-
 html {
   width: 100%;
 }

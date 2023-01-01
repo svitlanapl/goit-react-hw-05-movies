@@ -11,20 +11,21 @@ import { MovieCard } from 'components/MovieList/MovieList';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchQuery = searchParams.get('query') ?? '';
+  const [loading, setLoading] = useState(false);
+
+  const search = searchParams.get('query') ?? '';
 
   useEffect(() => {
     setMovies([]);
-    if (!searchQuery) {
+    if (!search) {
       return;
     }
 
-    async function getImage() {
+    async function getImg() {
       setLoading(true);
       try {
-        const movies = await getMoviesSearch(searchQuery);
+        const movies = await getMoviesSearch(search);
         setMovies(movies);
       } catch (error) {
         toast(error.message);
@@ -32,8 +33,8 @@ const Movies = () => {
         setLoading(false);
       }
     }
-    getImage();
-  }, [searchQuery]);
+    getImg();
+  }, [search]);
 
   const handleSubmit = query => {
     setSearchParams(query !== '' ? { query } : {});
@@ -47,5 +48,6 @@ const Movies = () => {
     </div>
   );
 };
+
 export default Movies;
 

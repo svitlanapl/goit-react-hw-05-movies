@@ -8,14 +8,14 @@ import { ReviewsTitle, ReviewsText } from './Reviews.styled';
 
 const Reviews = () => {
   const { movieId } = useParams();
-  const [movieReviews, setMovieReviews] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     async function fetchMovieReviews() {
       try {
         const movieReviews = await getMovieReviews(movieId);
 
-        setMovieReviews(movieReviews);
+        setReviews(movieReviews);
       } catch (error) {
         toast(error.message);
       }
@@ -24,17 +24,17 @@ const Reviews = () => {
     fetchMovieReviews();
   }, [movieId]);
 
-  if (!movieReviews) {
+  if (!reviews) {
     return;
   }
 
   return (
     <div>
-      {movieReviews.length === 0 && (
+      {reviews.length === 0 && (
         <p>Sorry, no reviews were found for this movie.</p>
       )}
       <ul>
-        {movieReviews.map(review => (
+        {reviews.map(review => (
           <li key={review.id}>
             <ReviewsTitle>Author: {review.author}</ReviewsTitle>
             <ReviewsText> {review.content} </ReviewsText>

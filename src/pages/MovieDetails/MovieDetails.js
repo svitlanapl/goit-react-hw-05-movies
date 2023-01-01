@@ -1,13 +1,14 @@
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { GoBack } from 'components/GoBack/GoBack';
 import { useState, useEffect, Suspense } from 'react';
 import { toast } from 'react-toastify';
-import defaultPoster from 'image/poster.png';
 
+import { GoBack } from 'components/GoBack/GoBack';
 import { getMovieDetails } from 'servises/movieApi';
 import { Loader } from 'components/Loader/Loader';
 
-import {  Wrapper, Image, Title, Text, TitleOverview, Inform,  Item} from './MovieDetails.styled';
+import defaultPoster from 'image/poster.png';
+
+import {  Wrapper, Image, Title, Text, TitleOverview, Inform, Item} from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w400';
@@ -16,13 +17,13 @@ const MovieDetails = () => {
   const goBack = location.state?.from ?? '/';
 
   const { movieId } = useParams();
-  const [movieDetails, setMovieDetails] = useState([]);
+  const [details, setDetails] = useState([]);
 
   useEffect(() => {
     async function fetchMovieDetails() {
       try {
         const movieDetails = await getMovieDetails(movieId);
-        setMovieDetails(movieDetails);
+        setDetails(movieDetails);
       } catch (error) {
         toast(error.message);
       }
@@ -37,33 +38,33 @@ const MovieDetails = () => {
       <Wrapper>
           <Image
             src={
-              movieDetails.poster_path
-                ? BASE_IMG_URL + movieDetails.poster_path
+              details.poster_path
+                ? `${BASE_IMG_URL}` + details.poster_path
                 : defaultPoster
             }
-            alt={movieDetails.title || movieDetails.name}
+            alt={details.title || details.name}
           />
         <div>
           <Title>
-            {movieDetails.title} (
-            {movieDetails.release_date
-              ? movieDetails.release_date.slice(0, 4)
+            {details.title} (
+            {details.release_date
+              ? details.release_date.slice(0, 4)
               : ' No year'}
             )
           </Title>
           <Text>
             User Score:{' '}
-            {movieDetails.vote_average
-              ? Math.floor(movieDetails.vote_average * 10).toFixed(0)
+            {details.vote_average
+              ? Math.floor(details.vote_average * 10).toFixed(0)
               : ''}
             %
           </Text>
           <TitleOverview> Overview</TitleOverview>
-          <Text>{movieDetails.overview}</Text>
+          <Text>{details.overview}</Text>
           <TitleOverview>Genres</TitleOverview>
           <Text>
-            {movieDetails.genres
-              ? movieDetails.genres.map(genre => genre.name).join(' ')
+            {details.genres
+              ? details.genres.map(genre => genre.name).join(' ')
               : 'Sorry genre not found.'}
           </Text>
         </div>

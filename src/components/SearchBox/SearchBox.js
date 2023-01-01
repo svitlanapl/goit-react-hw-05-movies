@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import { useState, useEffect } from 'react';
 
-import {  Wrapper,  Form, Input, Button, Icon} from '../SearchBox/SearchBox.styled';
+import {  Wrapper,  Form, Input, Button, Icon} from './SearchBox.styled';
 
 
 export const SearchBox = ({ query='', onChange }) => {
@@ -19,7 +19,6 @@ export const SearchBox = ({ query='', onChange }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-
     onChange(searchQuery);
     setSearchQuery('');
   };
